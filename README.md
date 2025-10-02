@@ -1,28 +1,34 @@
-# Tugas-Seacrhing-AI
-🚀 A* Search Algorithm in Python
-📌 Deskripsi
+# 🔎 A* Search Algorithm in Python
 
-Program ini mengimplementasikan algoritma A* dalam Python untuk mencari jalur terpendek dari titik awal (S) ke titik tujuan (G).
+Algoritma **A\*** digunakan untuk menemukan jalur terpendek dari titik awal (**Start**) ke titik tujuan (**Goal**) dengan menggabungkan:
+- **g(n)** = biaya perjalanan dari start ke node n  
+- **h(n)** = estimasi jarak dari node n ke goal  
+- **f(n) = g(n) + h(n)**
 
-Selain menemukan jalur terbaik, program ini juga menampilkan setiap tahapan pencarian secara detail, termasuk:
+---
 
-Node yang dipilih
+## 📑 Daftar Isi
+- [Deskripsi](#-deskripsi)
+- [Struktur Graph](#-struktur-graph)
+- [Heuristik](#-heuristik)
+- [Cara Kerja Algoritma](#-cara-kerja-algoritma)
+- [Cara Menjalankan](#-cara-menjalankan)
+- [Kesimpulan](#-kesimpulan)
 
-Perhitungan nilai g, h, dan f
+---
 
-Update frontier (open list)
+## 📝 Deskripsi
+Program ini mengimplementasikan **A\*** dengan bahasa Python.  
+Selain mencari jalur terpendek, program juga menampilkan **setiap langkah pencarian**:  
+- Node yang dipilih  
+- Perhitungan `g`, `h`, `f`  
+- Isi frontier (*open list*) dan *closed set*  
+- Jalur sementara  
 
-Isi closed set
+---
 
-Jalur sementara yang terbentuk
-
-Dengan begitu, program ini tidak hanya menghasilkan solusi, tetapi juga mempermudah pemahaman cara kerja algoritma A*.
-
-📊 Struktur Graph
-
-Graph diambil dari contoh soal (gambar).
-Setiap node terhubung ke tetangga dengan bobot (cost) tertentu.
-
+## 📊 Struktur Graph
+```python
 graph = {
     'S': [('A', 3), ('D', 2)],
     'A': [('S', 3), ('B', 5)],
@@ -33,90 +39,36 @@ graph = {
     'G': [('C', 4), ('E', 3)]
 }
 
-Heuristik (h)
-
-Heuristik adalah perkiraan jarak dari node ke goal:
-
 heuristic = {
-    'S': 7,
-    'A': 9,
-    'B': 4,
-    'C': 2,
-    'D': 5,
-    'E': 3,
-    'G': 0
+    'S': 7, 'A': 9, 'B': 4,
+    'C': 2, 'D': 5, 'E': 3, 'G': 0
 }
+```
+## ⚙️ Cara Kerja Algoritma
+- Masukkan node awal S ke frontier dengan g=0.
 
-⚙️ Cara Kerja Algoritma
+- Hitung f = g + h.
 
-Inisialisasi
+- Pilih node dengan f terkecil dari frontier.
 
-Masukkan node start S ke frontier (open list).
+- Jika node tersebut adalah G, pencarian selesai.
 
-Hitung f = g + h untuk node awal.
+- Jika bukan, pindahkan node ke closed set dan periksa semua tetangga.
 
-Loop pencarian
+- Update frontier dengan nilai g, h, f baru jika lebih baik.
 
-Ambil node dengan nilai f terkecil dari frontier.
+- Ulangi proses sampai goal ditemukan atau frontier kosong.
 
-Jika node = G, maka pencarian selesai.
+## ▶️ Cara Menjalankan
+1. Pastikan Python 3 sudah terinstall.
+2. jalankan dengan command :
+```
+python serching.py
+```
 
-Jika bukan:
+## ✅ Kesimpulan
+- Algoritma A* mencari jalur terpendek dengan menggabungkan biaya aktual (g) dan estimasi heuristik (h).
 
-Tambahkan ke closed set.
+- Dibandingkan BFS atau DFS, A* lebih efisien karena mempertimbangkan perkiraan jarak ke tujuan.
 
-Periksa semua tetangganya:
-
-Hitung tentative_g = g_current + cost.
-
-Hitung f_new = tentative_g + h(neighbor).
-
-Jika lebih baik, update dan tambahkan ke frontier.
-
-Output
-
-Setiap langkah menampilkan:
-
-Node yang sedang diekspansi
-
-Perhitungan nilai g, h, f
-
-Update frontier
-
-Isi closed set
-
-Hasil akhir
-
-Jalur optimal + total biaya perjalanan.
-
-🖥️ Contoh Output
-=== Proses A* Search dari S ke G ===
-
-[Langkah 1] Pop node 'S' | g=0, h=7, f=7
-    Path sekarang : ['S']
-    Periksa tetangga 'A' (cost=3) → g=3, h=9, f=12  → DITAMBAHKAN ke frontier
-    Periksa tetangga 'D' (cost=2) → g=2, h=5, f=7   → DITAMBAHKAN ke frontier
-    Frontier sekarang : [('D', 2, 7), ('A', 3, 12)]
-    Closed set        : ['S']
-------------------------------------------------------------
-[Langkah 2] Pop node 'D' | g=2, h=5, f=7
-   ...
-==> Goal ditemukan!
-Jalur akhir : ['S', 'D', 'B', 'E', 'G']
-Biaya total: 7
-
-▶️ Cara Menjalankan
-
-Pastikan Python 3 sudah terinstall.
-
-Simpan kode dalam file astar.py.
-
-Jalankan di terminal:
-
-python astar.py
-
-📌 Kesimpulan
-
-Algoritma A* menggabungkan biaya aktual (g) dan perkiraan ke goal (h) untuk mencari jalur terpendek.
-
-Program ini memperlihatkan langkah demi langkah proses pencarian, sehingga sangat cocok untuk belajar dan memahami bagaimana A* bekerja.
+- Program ini memperlihatkan langkah demi langkah pencarian, sehingga sangat membantu dalam pembelajaran Artificial Intelligence.
